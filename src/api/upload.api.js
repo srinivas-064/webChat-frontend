@@ -1,6 +1,7 @@
 import axios from "axios";
+import { API_BASE_URL } from "../config/runtime";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/uploads`;
+const API_URL = `${API_BASE_URL}/uploads`;
 
 const api = axios.create({
   baseURL: API_URL,

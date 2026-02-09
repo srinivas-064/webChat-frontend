@@ -1,6 +1,7 @@
 import axios from "axios";
+import { API_BASE_URL } from "../config/runtime";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/users`;
+const API_URL = `${API_BASE_URL}/users`;
 
 const api = axios.create({
   baseURL: API_URL,
@@ -21,16 +22,25 @@ export const signin = async (payload) => {
 };
 
 export const requestSignupOtp = async (email) => {
-  const res = await api.post("/signup/otp", { email });
+  const res = await api.post("/signup/send-otp", { email });
   return res.data;
 };
 
 export const requestForgotOtp = async (email) => {
-  const res = await api.post("/forgot/otp", { email });
+  const res = await api.post("/forgot/send-otp", { email });
   return res.data;
 };
 
-export const resetPassword = async (payload) => {
-  const res = await api.post("/reset-password", payload);
+export const verifyResetOtp = async (email, otp) => {
+  const res = await api.post("/forgot/verify-otp", { email, otp });
   return res.data;
 };
+
+export const resetPassword = async (email, otp, newPassword) => {
+  const res = await api.post("/forgot/reset", { email, otp, newPassword });
+  return res.data;
+};
+
+// Backward-compatible names used across existing pages
+export const sendSignupOtp = requestSignupOtp;
+export const sendResetOtp = requestForgotOtp;

@@ -1,6 +1,7 @@
 import axios from "axios";
+import { API_BASE_URL } from "../config/runtime";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/society-updates`;
+const API_URL = `${API_BASE_URL}/society-updates`;
 
 const api = axios.create({
   baseURL: API_URL,
@@ -18,6 +19,8 @@ export const fetchSocietyUpdateById = async (id) => {
   return res.data;
 };
 
+export const fetchSocietyUpdate = fetchSocietyUpdateById;
+
 export const createSocietyUpdate = async (payload) => {
   const res = await api.post("/", payload);
   return res.data;
@@ -25,5 +28,15 @@ export const createSocietyUpdate = async (payload) => {
 
 export const deleteSocietyUpdate = async (id) => {
   const res = await api.delete(`/${id}`);
+  return res.data;
+};
+
+export const likeSocietyUpdate = async (id) => {
+  const res = await api.post(`/${id}/like`);
+  return res.data;
+};
+
+export const commentOnSocietyUpdate = async (id, text) => {
+  const res = await api.post(`/${id}/comments`, { text });
   return res.data;
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
+import { API_BASE_URL } from "../config/runtime";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/blogs`;
+const API_URL = `${API_BASE_URL}/blogs`;
 
 const api = axios.create({
   baseURL: API_URL,
@@ -18,12 +19,29 @@ export const fetchBlogById = async (id) => {
   return res.data;
 };
 
+export const fetchBlog = fetchBlogById;
+
 export const createBlog = async (payload) => {
   const res = await api.post("/", payload);
   return res.data;
 };
 
+export const updateBlog = async (id, payload) => {
+  const res = await api.patch(`/${id}`, payload);
+  return res.data;
+};
+
 export const deleteBlog = async (id) => {
   const res = await api.delete(`/${id}`);
+  return res.data;
+};
+
+export const likeBlog = async (id) => {
+  const res = await api.post(`/${id}/like`);
+  return res.data;
+};
+
+export const commentOnBlog = async (id, text) => {
+  const res = await api.post(`/${id}/comments`, { text });
   return res.data;
 };
