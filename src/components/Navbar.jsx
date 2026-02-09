@@ -38,6 +38,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!loggedIn) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setRequestCount(0);
       return;
     }
@@ -65,6 +66,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!loggedIn) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setChatUnreadCount(0);
       return;
     }

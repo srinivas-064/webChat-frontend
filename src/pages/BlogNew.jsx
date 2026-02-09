@@ -32,7 +32,8 @@ export default function BlogNew() {
         const uploaded = await uploadImage(imageUrl);
         imageUrl = uploaded?.url || imageUrl;
         setForm((prev) => ({ ...prev, imageUrl }));
-      } catch (err) {
+    } catch (err) {
+      void err;
         addToast({ title: "Upload failed", description: "Unable to upload image" });
         setUploadingImage(false);
         return;

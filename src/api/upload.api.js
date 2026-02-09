@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/uploads";
+const API_URL = `${import.meta.env.VITE_API_URL}/uploads`;
 
 const api = axios.create({
   baseURL: API_URL,
@@ -8,7 +8,7 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-export const uploadImage = async (data) => {
-  const res = await api.post("/image", { data });
-  return res.data; // { url, publicId }
+export const uploadImage = async (payload) => {
+  const res = await api.post("/image", payload);
+  return res.data;
 };

@@ -17,6 +17,7 @@ export default function Profile() {
   useEffect(() => {
     const userId = user?.id;
     if (!userId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLoading(false);
       return;
     }
